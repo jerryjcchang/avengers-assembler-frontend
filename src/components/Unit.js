@@ -27,4 +27,4 @@ class Unit extends React.Component{
 
 }
 
-export default Unit
+export default Unit 

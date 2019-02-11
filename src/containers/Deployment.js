@@ -16,19 +16,20 @@ class Deployment extends React.Component {
 
     render(){
         return(
-            <Segment className="map">
+            <div className="map">
                 {this.props.zones.map((zone,index) => 
                     (<Zone 
                         name={zone} 
                         key={index+1} 
                         index={index}
                         units={this.props.units[index]}
+                        enemies={this.props.enemies[index]}
                     />
                 ))}
-            </Segment>
+            </div>
         )
     }
 
     }
 
-export default Deployment
+export default Deployment 

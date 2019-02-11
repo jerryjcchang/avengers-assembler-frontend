@@ -31,6 +31,33 @@ p {
   position: relative;
 }
 
+.ready-button {
+  font-size: 25px;
+  text-shadow: -1px 1px #346392;
+  padding: 12px;
+  border-radius: 5px;
+  color: white;
+  background-image: linear-gradient( #35608b, #002952);
+  border: none;
+  position: absolute;
+  right: 100px;
+  top: 20px;
+  z-index: 1;
+}
+
+.ready-button:hover,
+.ready-button.hover {
+  /* box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047; */
+  border-color: blue;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.ready-button:active,
+.ready-button.active {
+  box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
+}
+
 .map {
   background-image: url('http://www.wallpaperbetter.com/wallpaper/770/279/730/art-digital-art-map-world-map-black-1080P-wallpaper.jpg');
   background-repeat: no-repeat;
@@ -87,11 +114,18 @@ p {
 .unit-points {
   position: absolute;
   color: white;
-  right: 0;
-  bottom: 0;
+  /* right: 10px; */
+  bottom: 15px;
+  margin-left: 10px;
+  background-color: darkred;
+  font-size: 25px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-weight: bold;
 }
 
-.unit:hover {
+.unit-undeployed:hover {
   border-color: darkred;
 }
 
@@ -109,6 +143,7 @@ p {
   display: flex;
   margin-left: 10px;
   text-align: center;
+  height: 60px;
 }
 
 .team-header {
@@ -126,7 +161,7 @@ p {
   margin-right: 10px;
 }
 
-.thanos {
+.enemy {
   background: darkred;
   height: 60px;
   width: 60px;
