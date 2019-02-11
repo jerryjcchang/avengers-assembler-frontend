@@ -1,0 +1,133 @@
+body {
+  /* background: #000000; */
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #616161;
+  color: white;
+}
+
+p {
+  font-size: 6px
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  padding-left: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.map {
+  background-image: url('http://www.wallpaperbetter.com/wallpaper/770/279/730/art-digital-art-map-world-map-black-1080P-wallpaper.jpg');
+  background-repeat: no-repeat;
+  /* background: #000000; */
+  background-size: 100%;
+  position: relative;
+  width: 1300px;
+  height: 750px;
+  text-align: center;
+}
+
+.undeployed {
+  /* display: flex; */
+  position: absolute;
+  width: 95%;
+  height: 130px;
+  /* background: black; */
+  border-color: #2196f3;
+  border-width: 1px;
+  border-style: solid;
+  background: black;
+  bottom: 0;
+  right: 35px;
+  color: white;
+  text-align: left;
+  /* padding: 10px, auto, 10px, auto; */
+  size: 10px;
+  /* margin: 10px; */
+  padding-left: 5px;
+}
+
+.ud-container {
+  display: flex;
+}
+
+/* d */
+
+.unit-undeployed {
+  position: relative;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 10px;
+  background: grey;
+  text-align: center;
+  border-color: lightgrey;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+}
+
+.unit-points {
+  position: absolute;
+  color: white;
+  right: 0;
+  bottom: 0;
+}
+
+.unit:hover {
+  border-color: darkred;
+}
+
+.unassigned {
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 10px;
+  background: grey;
+}
+
+.team {
+  display: flex;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.team-header {
+  height: 5px;
+}
+
+.unit-deployed {
+  background: darkblue;
+  height: 60px;
+  width: 60px;
+  border-color: lightgrey;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.thanos {
+  background: darkred;
+  height: 60px;
+  width: 60px;
+}

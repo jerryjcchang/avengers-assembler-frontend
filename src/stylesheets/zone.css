@@ -1,0 +1,52 @@
+
+.zone {
+    background: rgb(0,0,0,.80);
+    border-style: solid;
+    border-color: #5a0600;
+    border-width: 1px;
+    color: white;
+    /* opacity: .80; */
+    width: 230px;
+    height: 202px;
+    margin: 3px;
+    border-radius: 15px;
+    position: absolute;
+  }
+  
+  .zone-header {
+    background: #5a0600;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    height: 10%;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+    opacity: 1;
+  }
+  
+  #new-york {
+    top: 225px;
+    left: 215px
+  }
+
+  #london {
+    top: 125px;
+    left: 465px;
+  }
+
+  #seoul {
+    top: 200px;
+    /* left: 1000px */
+    right: 75px
+  }
+
+  #wakanda {
+    bottom: 150px;
+    left: 600px
+  }
+
+  #sokovia {
+    right: 345px;
+    top: 180px
+  }
