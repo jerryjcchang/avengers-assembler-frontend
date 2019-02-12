@@ -10,6 +10,7 @@ import Modal from './components/Modal'
 class App extends Component {
 
   state={
+    gamePhase: "start",
     zones: ["new-york", "london", "wakanda", "sokovia", "seoul"],
     undeployed: [],
     enemies: [],
@@ -23,16 +24,18 @@ class App extends Component {
     eZone3: [],
     eZone4: [],
     eZone5: [],
-    zone1result: "",
-    zone2result: "",
-    zone3result: "",
-    zone4result: "",
-    zone5result: "",
-    gamesWon: "",
-    gamesLost: "",
+    result1: "",
+    result2: "",
+    result3: "",
+    result4: "",
+    result5: "",
+    gamesWon: 0,
+    gamesLost: 0,
     deployed: false,
-    round: "",
+    round: 1,
     showModal: true,
+    previousGame: "",
+    selectedUnit: {},
   }
 
   componentDidMount(){
@@ -61,7 +64,6 @@ class App extends Component {
     // change state
     const {destination,source,draggableId} = result
     const start = source.droppableId
-    const finish = destination.droppableId
     const unit = this.state[start].find(unit => unit.id === draggableId)
 
     if (!destination) {
@@ -77,7 +79,8 @@ class App extends Component {
 
 
 
-    if(start === finish){
+    if(start === destination.droppableId){
+      const finish = destination.droppableId
       const newZone = Array.from(this.state[start])
       newZone.splice(source.index, 1)
       newZone.splice(destination.index, 0, unit)
@@ -88,6 +91,7 @@ class App extends Component {
       return
     }
 
+    const finish = destination.droppableId
     const startZone = Array.from(this.state[start])
     startZone.splice(source.index, 1)
     const endZone = Array.from(this.state[finish])
@@ -99,13 +103,12 @@ class App extends Component {
     }
 
     this.setState(newState)
-    
   }
 
-  handleClickDeploy = () => {
-    this.generateEnemy()
-    setTimeout(this.compareTotal(),2000)
-  }
+  // handleClickDeploy = () => {
+  //   this.generateEnemy()
+  //   // setTimeout(this.compareTotal(),2000)
+  // }
 
   generateEnemy = () => {
     const combinations = [
@@ -126,24 +129,30 @@ class App extends Component {
       eZone3: shuffled.splice(0,[selectedCombo[2]]),
       eZone4: shuffled.splice(0,[selectedCombo[3]]),
       eZone5: shuffled.splice(0,[selectedCombo[4]]),
-    })
+      }, 
+        () => {this.setState(
+          this.compareTotal(),
+          () => {this.handleShowResult()}
+          )
+      }
+    )
 
-    this.setState(this.compareTotal())
+    
   }
 
   compareTotal = () => {
     let wins = {
-      zone1result: this.totalPoints('zone1') > this.totalPoints('eZone1') ? true : false,
-      zone2result: this.totalPoints('zone2') > this.totalPoints('eZone2') ? true : false,
-      zone3result: this.totalPoints('zone3') > this.totalPoints('eZone3') ? true : false,
-      zone4result: this.totalPoints('zone4') > this.totalPoints('eZone4') ? true : false,
-      zone5result: this.totalPoints('zone5') > this.totalPoints('eZone5') ? true : false,
+      result1: this.totalPoints('zone1') > this.totalPoints('eZone1') ? true : false,
+      result2: this.totalPoints('zone2') > this.totalPoints('eZone2') ? true : false,
+      result3: this.totalPoints('zone3') > this.totalPoints('eZone3') ? true : false,
+      result4: this.totalPoints('zone4') > this.totalPoints('eZone4') ? true : false,
+      result5: this.totalPoints('zone5') > this.totalPoints('eZone5') ? true : false,
     }
     return wins
   }
 
   totalPoints = (team) => {
-    debugger
+    // debugger
     return (
     this.state[team].length > 0 ?
     this.state[team].map(unit => unit.points).reduce((a,b) => a+b)
@@ -151,7 +160,13 @@ class App extends Component {
     0)
 }
 
-
+  handleShowResult = () => {
+    setTimeout(
+      () => {this.setState({
+        gamePhase: "result"
+      },
+      this.handleWinLoss)}, 2000)
+  }
 
   shuffle = (arr) => {
     let currentIndex = arr.length
@@ -169,23 +184,41 @@ class App extends Component {
     return arr
   }
 
+  handleWinLoss = () => {
+    let results = [this.state.result1, this.state.result2, this.state.result3, this.state.result4, this.state.result5]
+    let wins = results.filter(result => result === true)
+    if(wins.length >= 3){
+      setTimeout(this.handleWin,1000)
+    }
+    else {
+      setTimeout(this.handleLoss,2000)
+    }
+  }
+
   handleWin = () => {
     let wins = this.state.gamesWon
+    let round = this.state.round
     this.setState({
-      gamesWon: wins++
+      gamesWon: wins+1,
+      showModal: true,
+      previouGame: "WON"
     })
   }
 
   handleLoss = () => {
     let losses = this.state.gamesLost
+    let round = this.state.round
     this.setState({
-      gamesLost: losses++
+      gamesLost: losses+1,
+      showModal: true,
+      previousGame: "LOST"
     })
   }
 
-  newRound = () => {
+  handleNewRound = () => {
     let round = this.state.round
     this.setState({
+      gamePhase: "start",
       zone1: [],
       zone2: [],
       zone3: [],
@@ -196,9 +229,55 @@ class App extends Component {
       eZone3: [],
       eZone4: [],
       eZone5: [],
+      result1: "",
+      result2: "",
+      result3: "",
+      result4: "",
+      result5: "",
       deployed: false,
-      round: round++,
+      round: round+1,
+      showModal: false,
     })
+    this.getUnits()
+  }
+
+  handleNewGame = () => {
+    this.setState({
+      gamePhase: "start",
+      undeployed: [],
+      enemies: [],
+      zone1: [],
+      zone2: [],
+      zone3: [],
+      zone4: [],
+      zone5: [],
+      eZone1: [],
+      eZone2: [],
+      eZone3: [],
+      eZone4: [],
+      eZone5: [],
+      result1: "",
+      result2: "",
+      result3: "",
+      result4: "",
+      result5: "",
+      gamesWon: 0,
+      gamesLost: 0,
+      deployed: false,
+      round: 1,
+      showModal: false,
+      previousGame: "",
+      selectedUnit: {},
+    })
+    this.getUnits()
+  }
+
+  handleSelectUnit = (unit) => {
+    // this.setState({
+    //   showModal: true,
+    //   selectedUnit: unit,
+    // })
+    console.log("attempting to select unit", unit.name)
   }
 
   render() {
@@ -207,21 +286,34 @@ class App extends Component {
       <DragDropContext
         onDragEnd={this.onDragEnd}>  
       <div>
-        <button className="ready-button" onClick={this.handleClickDeploy}>DEPLOY</button>
         <Deployment 
           zones={this.state.zones} 
           units={[this.state.zone1, this.state.zone2, this.state.zone3, this.state.zone4, this.state.zone5]} 
+          generateEnemy={this.generateEnemy}
           enemies={[this.state.eZone1, this.state.eZone2, this.state.eZone3, this.state.eZone4, this.state.eZone5]}
+          results={[this.state.result1, this.state.result2, this.state.result3, this.state.result4, this.state.result5]}
           onWin={this.handleWin}
           onLose={this.handleLoss}
           deployed={this.state.deployed}
-          compareTotal={this.compareTotal}
+          gamePhase={this.state.gamePhase}
+          round={this.state.round}
+          // compareTotal={this.compareTotal}
           />
-        <Undeployed units={this.state.undeployed}/>        
+        <Undeployed units={this.state.undeployed} selectUnit={this.handleSelectUnit}/>        
       </div>
       </DragDropContext>
       {this.state.showModal ? <div className="page-mask"></div> : null}
-      {this.state.showModal ? <Modal toggleModal={this.handleModal}/> : null}
+      {this.state.showModal ? 
+        <Modal 
+          toggleModal={this.handleModal}
+          result={this.state.previousGame}
+          newRound={this.handleNewRound}
+          newGame={this.handleNewGame}
+          wins={this.state.gamesWon}
+          losses={this.state.gamesLost}
+          /> 
+        : 
+        null}
       </div>
     );
   }

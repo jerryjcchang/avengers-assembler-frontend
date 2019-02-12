@@ -45,12 +45,13 @@ p {
   font-size: 25px;
   text-shadow: -1px 1px #346392;
   padding: 12px;
+  padding-top: 14px;
   border-radius: 5px;
   color: white;
   background-image: linear-gradient( #35608b, #002952);
   border: none;
   position: absolute;
-  right: 100px;
+  right: 25px;
   top: 20px;
   z-index: 1;
   font-family: 'Orbitron', sans-serif;
@@ -213,5 +214,6 @@ p {
   vertical-align: middle;
   border-radius: 15px;
   font-size: 50px;
-  opacity: .90
+  opacity: .90;
+  font-family: 'Orbitron', sans-serif;
 }

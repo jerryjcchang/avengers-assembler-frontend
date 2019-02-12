@@ -23,6 +23,7 @@ render(){
                 unit={unit}
                 div="unit-undeployed"
                 ptsDiv="unit-points"
+                onClick={() => {this.props.selectUnit(unit)}}
                 />
                 // console.log(unit)
                 )}

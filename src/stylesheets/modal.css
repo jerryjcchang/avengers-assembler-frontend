@@ -32,6 +32,15 @@
     font-family: 'Orbitron', sans-serif;
 }
 
+.modal-result{
+    font-size: 28px;
+    color: white;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: 'Orbitron', sans-serif;
+    width: 90%;
+}
+
 .instructions{
     font-size: 21px;
 }
@@ -53,4 +62,17 @@
 .button:hover {
     border-color: darkred;
     border-width: 2px;
+}
+
+#play-again{
+    height: 50px;
+    width: 150px;
+}
+
+.red {
+    color: darkred;
+  }
+
+.blue{
+    color: #0065b8;
 }

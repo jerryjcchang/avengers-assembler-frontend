@@ -18,9 +18,10 @@
     color: white;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    height: 10%;
+    height: 12%;
     text-align: left;
-    padding: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
     font-weight: bold;
     opacity: 1;
     font-family: 'Orbitron', sans-serif;

@@ -5,12 +5,6 @@ import Team from '../components/Team'
 
 class Zone extends React.Component {
 
-    
-    state={
-        win: "",
-        active: this.props.deployed
-    }
-
     parseName(name){
         // let t=this
         // debugger
@@ -42,6 +36,20 @@ class Zone extends React.Component {
         }
     }
 
+    setResultDiv = () => {
+        if(this.props.gamePhase === "result"){
+            let t=this
+            let result
+            if(this.props.result === true){
+                result = <div className="result">WIN</div>
+            } else {
+                result = <div className="result">LOSS</div>
+            }
+            // debugger
+            return result
+        }
+    }
+
     render(){
         // debugger
         return(
@@ -53,12 +61,12 @@ class Zone extends React.Component {
             {...provided.droppableProps}
             // isDraggingOver={snapshot.isDraggingOver}
             >
-                <div className="zone-header">{`${this.parseName(this.props.name)}     [${this.totalPoints("units")} PTS]`}</div>
+                <div className="zone-header">{`${this.parseName(this.props.name).toUpperCase()}\xa0\xa0\xa0\xa0\xa0\xa0${this.totalPoints("units")} PTS`}</div>
                 <p className="team-header">Avengers</p>
                 <Team team="hero"  zone={this.props.index+1} units={this.props.units}/>
                 <p className="team-header">Thanos Army</p>
                 <Team team="enemy" units={this.props.enemies}/>
-                {this.state.win? <div className="result">WIN</div> : null}
+                {this.setResultDiv()}
                 {provided.placeholder}
             </div>
             )}
