@@ -17,8 +17,10 @@ class Unit extends React.Component{
                     // isDragging={snapshot.isDragging}
                     >
                     {/* <h3>Unit</h3> */}
-                    <img className={this.props.div} src={`icons/${this.props.unit.img_path}.png`}></img>
-                    {/* <div className="unit-points">{this.props.unit.points}</div> */}
+                    <div className="unit-icon">
+                        <img className={this.props.div} src={`icons/${this.props.unit.img_path}.png`}></img>
+                        <div className={this.props.ptsDiv}>{this.props.unit.points}</div>
+                    </div>
                     </div>
                 )}
             </Draggable>

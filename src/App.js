@@ -5,6 +5,7 @@ import { Segment, Button } from 'semantic-ui-react';
 import { DragDropContext } from 'react-beautiful-dnd'
 import Deployment from './containers/Deployment'
 import Undeployed from './containers/Undeployed'
+import Modal from './components/Modal'
 
 class App extends Component {
 
@@ -22,6 +23,16 @@ class App extends Component {
     eZone3: [],
     eZone4: [],
     eZone5: [],
+    zone1result: "",
+    zone2result: "",
+    zone3result: "",
+    zone4result: "",
+    zone5result: "",
+    gamesWon: "",
+    gamesLost: "",
+    deployed: false,
+    round: "",
+    showModal: true,
   }
 
   componentDidMount(){
@@ -33,10 +44,16 @@ class App extends Component {
     .then(r => r.json())
     .then(units => 
       this.setState({
-        undeployed: units,
-        enemies: units
+        undeployed: units.heroes,
+        enemies: units.enemies
       })
     )
+  }
+
+  handleModal = () => {
+    this.setState({
+      showModal: !this.state.showModal,
+    })
   }
 
   onDragEnd = result => {
@@ -87,6 +104,7 @@ class App extends Component {
 
   handleClickDeploy = () => {
     this.generateEnemy()
+    setTimeout(this.compareTotal(),2000)
   }
 
   generateEnemy = () => {
@@ -110,7 +128,30 @@ class App extends Component {
       eZone5: shuffled.splice(0,[selectedCombo[4]]),
     })
 
+    this.setState(this.compareTotal())
   }
+
+  compareTotal = () => {
+    let wins = {
+      zone1result: this.totalPoints('zone1') > this.totalPoints('eZone1') ? true : false,
+      zone2result: this.totalPoints('zone2') > this.totalPoints('eZone2') ? true : false,
+      zone3result: this.totalPoints('zone3') > this.totalPoints('eZone3') ? true : false,
+      zone4result: this.totalPoints('zone4') > this.totalPoints('eZone4') ? true : false,
+      zone5result: this.totalPoints('zone5') > this.totalPoints('eZone5') ? true : false,
+    }
+    return wins
+  }
+
+  totalPoints = (team) => {
+    debugger
+    return (
+    this.state[team].length > 0 ?
+    this.state[team].map(unit => unit.points).reduce((a,b) => a+b)
+    :
+    0)
+}
+
+
 
   shuffle = (arr) => {
     let currentIndex = arr.length
@@ -128,21 +169,63 @@ class App extends Component {
     return arr
   }
 
+  handleWin = () => {
+    let wins = this.state.gamesWon
+    this.setState({
+      gamesWon: wins++
+    })
+  }
+
+  handleLoss = () => {
+    let losses = this.state.gamesLost
+    this.setState({
+      gamesLost: losses++
+    })
+  }
+
+  newRound = () => {
+    let round = this.state.round
+    this.setState({
+      zone1: [],
+      zone2: [],
+      zone3: [],
+      zone4: [],
+      zone5: [],
+      eZone1: [],
+      eZone2: [],
+      eZone3: [],
+      eZone4: [],
+      eZone5: [],
+      deployed: false,
+      round: round++,
+    })
+  }
+
   render() {
     return (
+      <div className="App">
       <DragDropContext
         onDragEnd={this.onDragEnd}>  
-      <Segment className="App">
+      <div>
         <button className="ready-button" onClick={this.handleClickDeploy}>DEPLOY</button>
         <Deployment 
           zones={this.state.zones} 
           units={[this.state.zone1, this.state.zone2, this.state.zone3, this.state.zone4, this.state.zone5]} 
-          enemies={[this.state.eZone1, this.state.eZone2, this.state.eZone3, this.state.eZone4, this.state.eZone5]}/>
+          enemies={[this.state.eZone1, this.state.eZone2, this.state.eZone3, this.state.eZone4, this.state.eZone5]}
+          onWin={this.handleWin}
+          onLose={this.handleLoss}
+          deployed={this.state.deployed}
+          compareTotal={this.compareTotal}
+          />
         <Undeployed units={this.state.undeployed}/>        
-      </Segment>
+      </div>
       </DragDropContext>
+      {this.state.showModal ? <div className="page-mask"></div> : null}
+      {this.state.showModal ? <Modal toggleModal={this.handleModal}/> : null}
+      </div>
     );
   }
+
 }
 
 export default App;

@@ -3,10 +3,6 @@ import Unit from './Unit'
 
 class Team extends React.Component{
 
-    state = {
-        units: [1,2,3]
-    }
-
     render(){
         return(
             <div className="team">
@@ -18,6 +14,7 @@ class Team extends React.Component{
                     zone={this.props.zone}
                     unit={unit}
                     div="unit-deployed"
+                    ptsDiv="unit-deployed-points"
                     />
                     ))}
             </div>

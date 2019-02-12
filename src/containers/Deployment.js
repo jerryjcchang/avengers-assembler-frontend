@@ -6,13 +6,7 @@ import Zone from '../components/Zone'
 
 class Deployment extends React.Component {
 
-    state={
-        newyork:[],
-        london:[],
-        wakanda:[],
-        sokovia:[],
-        seoul:[]
-    }
+
 
     render(){
         return(
@@ -24,6 +18,7 @@ class Deployment extends React.Component {
                         index={index}
                         units={this.props.units[index]}
                         enemies={this.props.enemies[index]}
+                        deployed={this.props.deployed}
                     />
                 ))}
             </div>

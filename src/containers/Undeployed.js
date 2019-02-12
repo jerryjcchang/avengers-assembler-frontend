@@ -22,6 +22,7 @@ render(){
                 zone="undeployed"
                 unit={unit}
                 div="unit-undeployed"
+                ptsDiv="unit-points"
                 />
                 // console.log(unit)
                 )}
