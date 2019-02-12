@@ -217,3 +217,21 @@ p {
   opacity: .90;
   font-family: 'Orbitron', sans-serif;
 }
+
+.round-header {
+  position: absolute;
+  background: black;
+  width: 50%;
+  height: 5%;
+  left: 325px;
+  font-family: 'Orbitron', sans-serif;
+  border-left: darkred;
+  border-right: darkred;
+  border-bottom: darkred;
+  border-style: solid;
+  border-top-width: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-size: 35px;
+  padding-top: 10px;
+}

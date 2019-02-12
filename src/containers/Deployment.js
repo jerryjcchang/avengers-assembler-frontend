@@ -39,6 +39,7 @@ class Deployment extends React.Component {
         return(
 
             <div className="map">
+                 <div className="round-header">Round {this.props.round}</div>
                  <button className="ready-button" onClick={this.handleClickDeploy}>DEPLOY</button>
                 {this.props.zones.map((zone,index) => 
                     (<Zone 
