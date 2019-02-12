@@ -65,8 +65,9 @@ class App extends Component {
     const {destination,source,draggableId} = result
     const start = source.droppableId
     const unit = this.state[start].find(unit => unit.id === draggableId)
-
-    if (!destination) {
+    // let t = this
+    // debugger
+    if (!destination || this.state[destination.droppableId].length === 3) {
         return;
     }
 
