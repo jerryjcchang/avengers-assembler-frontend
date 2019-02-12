@@ -90,7 +90,7 @@ class App extends Component {
       })
       return
     }
-
+    
     const finish = destination.droppableId
     const startZone = Array.from(this.state[start])
     startZone.splice(source.index, 1)
@@ -191,7 +191,7 @@ class App extends Component {
       setTimeout(this.handleWin,1000)
     }
     else {
-      setTimeout(this.handleLoss,2000)
+      setTimeout(this.handleLoss,1000)
     }
   }
 
@@ -201,7 +201,7 @@ class App extends Component {
     this.setState({
       gamesWon: wins+1,
       showModal: true,
-      previouGame: "WON"
+      previousGame: "WON"
     })
   }
 

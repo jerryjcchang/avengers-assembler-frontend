@@ -71,10 +71,10 @@ p {
 }
 
 .map {
-  background-image: url('http://www.wallpaperbetter.com/wallpaper/770/279/730/art-digital-art-map-world-map-black-1080P-wallpaper.jpg');
+  background-image: url('/img/mission_map.jpeg');
   background-repeat: no-repeat;
   /* background: #000000; */
-  background-size: 100%;
+  background-size: 110%;
   position: relative;
   width: 1300px;
   height: 750px;
@@ -99,10 +99,14 @@ p {
   size: 10px;
   /* margin: 10px; */
   padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  overflow: scroll;
 }
 
 .undeployed-header {
-  font-size: 10px
+  font-size: 10px;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .ud-container {
@@ -160,7 +164,8 @@ p {
 }
 
 .unit-undeployed:hover {
-  border-color: darkred;
+  border-color: red;
+  border-width: 2px; 
 }
 
 .unassigned {

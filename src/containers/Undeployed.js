@@ -13,7 +13,7 @@ render(){
         ref={provided.innerRef}
         {...provided.droppableProps}
         >
-            <p className="undeployed-header">Undeployed Units</p>
+            <p className="undeployed-header">UNDEPLOYED UNITS</p>
             <div className="ud-container">
             {this.props.units.map((unit, index) => 
                 <Unit 
