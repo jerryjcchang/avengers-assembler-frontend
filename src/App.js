@@ -47,8 +47,8 @@ class App extends Component {
     .then(r => r.json())
     .then(units => 
       this.setState({
-        undeployed: units.heroes,
-        enemies: units.enemies
+        undeployed: units.enemies,
+        enemies: units.heroes,
       })
     )
   }
@@ -220,11 +220,6 @@ class App extends Component {
     let round = this.state.round
     this.setState({
       gamePhase: "start",
-      zone1: [],
-      zone2: [],
-      zone3: [],
-      zone4: [],
-      zone5: [],
       eZone1: [],
       eZone2: [],
       eZone3: [],
