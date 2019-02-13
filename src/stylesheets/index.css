@@ -10,10 +10,11 @@ body {
   text-align: center;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   background-color: #616161;
   color: white;
+  overflow: hidden;
+  width: 100%;
 }
 
 p {
@@ -33,12 +34,12 @@ p {
 #app {
   width: 100%;
   height: 100%;
-  padding-left: 0px 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   text-align: center;
   position: relative;
+  margin: 0 auto;
 }
 
 .ready-button {
@@ -78,30 +79,31 @@ p {
   position: relative;
   width: 1300px;
   height: 750px;
-  text-align: center;
+  display: flex;
+  left: 45px;
 }
 
 .undeployed {
   /* display: flex; */
-  position: absolute;
-  width: 95%;
-  height: 140px;
+  position: relative;
+  max-width: 1365px;
+  max-height: 500px;
   /* background: black; */
   border-color: #2196f3;
   border-width: 1px;
   border-style: solid;
   background: black;
-  bottom: 0;
-  right: 35px;
+  bottom: 100px;
   color: white;
   text-align: left;
   /* padding: 10px, auto, 10px, auto; */
   size: 10px;
   /* margin: 10px; */
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 5px;
-  overflow: scroll;
+  /* right: 45px; */
+  /* overflow-y: scroll; */
 }
 
 .undeployed-header {

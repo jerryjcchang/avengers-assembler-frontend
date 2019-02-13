@@ -17,8 +17,8 @@ class Modal extends React.Component{
                 case "intro":
                     text = <p className="text">
                             Four years have passed since the Decimation that wiped out half of all living creatures. 
-                            <br/><br/>The remainder of Earth's and the Galaxy's mightiest heroes have come together with a slim hope of reversing Thanos' actions and bring everyone back to life. 
-                            <br/><br/>Discovering their plan to undo his great achievement, Thanos has used the Infinity Gauntlet to resurrect the Avengers greatest foes to stop them.
+                            <br/><br/>The remainder of Earth's and the Galaxy's mightiest heroes have come together with a slim hope to reverse Thanos' actions and restore the universe. 
+                            <br/><br/>Discovering their plan to undo his triumph, Thanos has used the Infinity Gauntlet to resurrect the Avengers greatest foes to stop them.
                         </p>
                     break;
                 case "instructions":

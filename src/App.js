@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Segment, Button } from 'semantic-ui-react';
 import { DragDropContext } from 'react-beautiful-dnd'
 import Deployment from './containers/Deployment'
 import Undeployed from './containers/Undeployed'
 import Modal from './components/Modal'
+import {Route} from 'react-router-dom'
+
 
 class App extends Component {
 
@@ -143,11 +143,11 @@ class App extends Component {
 
   compareTotal = () => {
     let wins = {
-      result1: this.totalPoints('zone1') > this.totalPoints('eZone1') ? true : false,
-      result2: this.totalPoints('zone2') > this.totalPoints('eZone2') ? true : false,
-      result3: this.totalPoints('zone3') > this.totalPoints('eZone3') ? true : false,
-      result4: this.totalPoints('zone4') > this.totalPoints('eZone4') ? true : false,
-      result5: this.totalPoints('zone5') > this.totalPoints('eZone5') ? true : false,
+      result1: this.totalPoints('zone1') >= this.totalPoints('eZone1') ? true : false,
+      result2: this.totalPoints('zone2') >= this.totalPoints('eZone2') ? true : false,
+      result3: this.totalPoints('zone3') >= this.totalPoints('eZone3') ? true : false,
+      result4: this.totalPoints('zone4') >= this.totalPoints('eZone4') ? true : false,
+      result5: this.totalPoints('zone5') >= this.totalPoints('eZone5') ? true : false,
     }
     return wins
   }
@@ -166,7 +166,7 @@ class App extends Component {
       () => {this.setState({
         gamePhase: "result"
       },
-      this.handleWinLoss)}, 2000)
+      this.handleWinLoss)}, 3000)
   }
 
   shuffle = (arr) => {
@@ -220,11 +220,6 @@ class App extends Component {
     let round = this.state.round
     this.setState({
       gamePhase: "start",
-      zone1: [],
-      zone2: [],
-      zone3: [],
-      zone4: [],
-      zone5: [],
       eZone1: [],
       eZone2: [],
       eZone3: [],
@@ -239,7 +234,7 @@ class App extends Component {
       round: round+1,
       showModal: false,
     })
-    this.getUnits()
+    // this.getUnits()
   }
 
   handleNewGame = () => {
@@ -305,14 +300,20 @@ class App extends Component {
       </DragDropContext>
       {this.state.showModal ? <div className="page-mask"></div> : null}
       {this.state.showModal ? 
-        <Modal 
-          toggleModal={this.handleModal}
-          result={this.state.previousGame}
-          newRound={this.handleNewRound}
-          newGame={this.handleNewGame}
-          wins={this.state.gamesWon}
-          losses={this.state.gamesLost}
-          /> 
+        <Route path="/" render={() => {
+          return(
+          <Modal 
+            toggleModal={this.handleModal}
+            result={this.state.previousGame}
+            newRound={this.handleNewRound}
+            newGame={this.handleNewGame}
+            wins={this.state.gamesWon}
+            losses={this.state.gamesLost}
+            /> 
+          )
+        }}
+          />
+        
         : 
         null}
       </div>
