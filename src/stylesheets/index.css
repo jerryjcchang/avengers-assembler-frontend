@@ -86,14 +86,14 @@ p {
 .undeployed {
   /* display: flex; */
   position: relative;
-  max-width: 1365px;
+  width: 1365px;
   max-height: 500px;
   /* background: black; */
   border-color: #2196f3;
   border-width: 1px;
   border-style: solid;
   background: black;
-  bottom: 100px;
+  bottom: 75px;
   color: white;
   text-align: left;
   /* padding: 10px, auto, 10px, auto; */
