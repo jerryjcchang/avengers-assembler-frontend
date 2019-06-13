@@ -87,6 +87,7 @@ p {
   /* display: flex; */
   position: relative;
   width: 1365px;
+  min-height: 140px;
   max-height: 500px;
   /* background: black; */
   border-color: #2196f3;
@@ -167,7 +168,7 @@ p {
 
 .unit-undeployed:hover {
   border-color: red;
-  border-width: 2px; 
+  border-width: 2px;
 }
 
 .unassigned {

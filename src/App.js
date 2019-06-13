@@ -5,6 +5,7 @@ import Deployment from './containers/Deployment'
 import Undeployed from './containers/Undeployed'
 import Modal from './components/Modal'
 import {Route} from 'react-router-dom'
+import Player from './components/AudioPlayer'
 
 
 class App extends Component {
@@ -45,7 +46,7 @@ class App extends Component {
   getUnits(){
     fetch(`http://localhost:3000/api/v1/units`)
     .then(r => r.json())
-    .then(units => 
+    .then(units =>
       this.setState({
         undeployed: units.heroes,
         enemies: units.enemies
@@ -81,17 +82,17 @@ class App extends Component {
 
 
     if(start === destination.droppableId){
-      const finish = destination.droppableId
-      const newZone = Array.from(this.state[start])
+      let t = this
+      let finish = destination.droppableId
+      let newZone = Array.from(this.state[start])
       newZone.splice(source.index, 1)
       newZone.splice(destination.index, 0, unit)
-      // debugger
       this.setState({
         [finish]: newZone
       })
       return
     }
-    
+
     const finish = destination.droppableId
     const startZone = Array.from(this.state[start])
     startZone.splice(source.index, 1)
@@ -121,16 +122,16 @@ class App extends Component {
     ]
     const randomIndex = Math.ceil(Math.random() *4)
     let selectedCombo = combinations[randomIndex]
-    
+
     let shuffled = this.shuffle([...this.state.enemies])
-    
+
     this.setState({
       eZone1: shuffled.splice(0,[selectedCombo[0]]),
       eZone2: shuffled.splice(0,[selectedCombo[1]]),
       eZone3: shuffled.splice(0,[selectedCombo[2]]),
       eZone4: shuffled.splice(0,[selectedCombo[3]]),
       eZone5: shuffled.splice(0,[selectedCombo[4]]),
-      }, 
+      },
         () => {this.setState(
           this.compareTotal(),
           () => {this.handleShowResult()}
@@ -138,7 +139,7 @@ class App extends Component {
       }
     )
 
-    
+
   }
 
   compareTotal = () => {
@@ -172,7 +173,7 @@ class App extends Component {
   shuffle = (arr) => {
     let currentIndex = arr.length
     let tempValue, randomIndex
-    
+
     while(currentIndex !== 0){
       randomIndex = Math.floor(Math.random() * currentIndex)
       --currentIndex
@@ -279,12 +280,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <Player />
       <DragDropContext
-        onDragEnd={this.onDragEnd}>  
+        onDragEnd={this.onDragEnd}>
       <div>
-        <Deployment 
-          zones={this.state.zones} 
-          units={[this.state.zone1, this.state.zone2, this.state.zone3, this.state.zone4, this.state.zone5]} 
+        <Deployment
+          zones={this.state.zones}
+          units={[this.state.zone1, this.state.zone2, this.state.zone3, this.state.zone4, this.state.zone5]}
           generateEnemy={this.generateEnemy}
           enemies={[this.state.eZone1, this.state.eZone2, this.state.eZone3, this.state.eZone4, this.state.eZone5]}
           results={[this.state.result1, this.state.result2, this.state.result3, this.state.result4, this.state.result5]}
@@ -295,26 +297,26 @@ class App extends Component {
           round={this.state.round}
           // compareTotal={this.compareTotal}
           />
-        <Undeployed units={this.state.undeployed} selectUnit={this.handleSelectUnit}/>        
+        <Undeployed units={this.state.undeployed} selectUnit={this.handleSelectUnit}/>
       </div>
       </DragDropContext>
       {this.state.showModal ? <div className="page-mask"></div> : null}
-      {this.state.showModal ? 
+      {this.state.showModal ?
         <Route path="/" render={() => {
           return(
-          <Modal 
+          <Modal
             toggleModal={this.handleModal}
             result={this.state.previousGame}
             newRound={this.handleNewRound}
             newGame={this.handleNewGame}
             wins={this.state.gamesWon}
             losses={this.state.gamesLost}
-            /> 
+            />
           )
         }}
           />
-        
-        : 
+
+        :
         null}
       </div>
     );

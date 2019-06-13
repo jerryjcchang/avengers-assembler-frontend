@@ -4,7 +4,7 @@
     width: 800px;
     height: 475px;
     z-index: 1;
-    bottom: 650px;
+    bottom: 85vh;
     left: 295px;
     border-radius: 10px;
     border-style: solid;
@@ -13,7 +13,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: justify;
     line-height: 1.4;
-    
+
 }
 
 .modal-header {
@@ -22,7 +22,7 @@
     background-color: #004378;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    
+
 }
 
 .text{
