@@ -7,6 +7,7 @@ import Modal from './components/Modal'
 import {Route} from 'react-router-dom'
 import Player from './components/AudioPlayer'
 
+const URL = 'https://avengers-assembler-backend.herokuapp.com/api/v1/units'
 
 class App extends Component {
 
@@ -44,7 +45,7 @@ class App extends Component {
   }
 
   getUnits(){
-    fetch(`http://localhost:3000/api/v1/units`)
+    fetch(URL)
     .then(r => r.json())
     .then(units =>
       this.setState({
@@ -144,11 +145,11 @@ class App extends Component {
 
   compareTotal = () => {
     let wins = {
-      result1: this.totalPoints('zone1') >= this.totalPoints('eZone1') ? true : false,
-      result2: this.totalPoints('zone2') >= this.totalPoints('eZone2') ? true : false,
-      result3: this.totalPoints('zone3') >= this.totalPoints('eZone3') ? true : false,
-      result4: this.totalPoints('zone4') >= this.totalPoints('eZone4') ? true : false,
-      result5: this.totalPoints('zone5') >= this.totalPoints('eZone5') ? true : false,
+      result1: this.totalPoints('zone1') > this.totalPoints('eZone1') ? true : false,
+      result2: this.totalPoints('zone2') > this.totalPoints('eZone2') ? true : false,
+      result3: this.totalPoints('zone3') > this.totalPoints('eZone3') ? true : false,
+      result4: this.totalPoints('zone4') > this.totalPoints('eZone4') ? true : false,
+      result5: this.totalPoints('zone5') > this.totalPoints('eZone5') ? true : false,
     }
     return wins
   }
