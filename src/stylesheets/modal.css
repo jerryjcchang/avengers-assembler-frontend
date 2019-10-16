@@ -1,11 +1,9 @@
 .modal {
-    position: relative;
+    position: absolute;
     background: black;
-    width: 800px;
-    height: 475px;
-    z-index: 1;
-    bottom: 85vh;
-    left: 295px;
+    width: 60%;
+    height: 65%;
+    z-index: 3;
     border-radius: 10px;
     border-style: solid;
     border-color: #004378;
@@ -13,7 +11,9 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: justify;
     line-height: 1.4;
-
+    overflow: hidden;
+    margin-left: 20%;
+    margin-top: 5%;
 }
 
 .modal-header {
@@ -22,28 +22,35 @@
     background-color: #004378;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
 
+.modal-body {
+  height: 100%;
+  overflow-x: scroll;
 }
 
 .text{
-    font-size: 22px;
+  padding-top: 1vh;
+    font-size: 2.5vh;
     color: white;
     padding-left: 30px;
     padding-right: 30px;
     font-family: 'Orbitron', sans-serif;
+    overflow-y: scroll;
 }
 
 .modal-result{
-    font-size: 28px;
+    font-size: 4vh;
     color: white;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10vh;
     font-family: 'Orbitron', sans-serif;
     width: 90%;
+    padding-top: 4vh;
 }
 
 .instructions{
-    font-size: 16px;
+    padding-top: 1vh;
+    font-size: 2.0vh;
 }
 
 .button{

@@ -16,8 +16,8 @@ class Modal extends React.Component{
             switch(this.state.body) {
                 case "intro":
                     text = <p className="text">
-                            Four years have passed since the Decimation that wiped out half of all living creatures. 
-                            <br/><br/>The remainder of Earth's and the Galaxy's mightiest heroes have come together with a slim hope to reverse Thanos' actions and restore the universe. 
+                            Four years have passed since the Decimation that wiped out half of all living creatures.
+                            <br/><br/>The remainder of Earth's and the Galaxy's mightiest heroes have come together with a slim hope to reverse Thanos' actions and restore the universe.
                             <br/><br/>Discovering their plan to undo his triumph, Thanos has used the Infinity Gauntlet to resurrect the Avengers greatest foes to stop them.
                         </p>
                     break;
@@ -33,16 +33,16 @@ class Modal extends React.Component{
                     break;
                 default:
                     text = null
-                    
+
             }
         }
         else {
-            this.state.wins < 3 && this.state.losses < 3 ? 
+            this.state.wins < 3 && this.state.losses < 3 ?
             text = <p className="modal-result">
                         You have <span class="red"><b>{this.state.previousGame}</b></span> this round of battles.<br/><br/>
                         Redeploy your units and prepare for the next wave of attack.<br/><br/>
                         Click the <span className="blue"><b>DEPLOY</b></span> button when ready.
-                        
+
                    </p>
             :
                 text = <p className="modal-result">
@@ -83,11 +83,13 @@ class Modal extends React.Component{
         return(
             <div className="modal">
                 <div className="modal-header"></div>
+                <div className="modal-body">
                 {this.modalText()}
-                {this.state.previousGame === "" ? 
+                {this.state.previousGame === "" ?
                 <button className="button" onClick={this.handleNextButton}>NEXT</button>
                 :
                 this.handleNextRoundButton()}
+                </div>
             </div>
         )
     }

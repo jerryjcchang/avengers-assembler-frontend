@@ -25,6 +25,10 @@ class Deployment extends React.Component {
         // this.setState(wins)
       }
 
+      handleVolumeIcon = () => {
+        return(this.props.audio ? "up" : "off")
+      }
+
 
     totalPoints = (team) => {
         debugger
@@ -39,12 +43,16 @@ class Deployment extends React.Component {
         return(
 
             <div className="map">
+                 <i id="volume-icon"
+                    className={`volume ${this.handleVolumeIcon()} icon large circular inverted blue`}
+                    onClick={this.props.toggleAudio}
+                  ></i>
                  <div className="round-header">Round {this.props.round}</div>
                  <button className="ready-button" onClick={this.handleClickDeploy}>DEPLOY</button>
-                {this.props.zones.map((zone,index) => 
-                    (<Zone 
-                        name={zone} 
-                        key={index+1} 
+                {this.props.zones.map((zone,index) =>
+                    (<Zone
+                        name={zone}
+                        key={index+1}
                         index={index}
                         units={this.props.units[index]}
                         enemies={this.props.enemies[index]}
@@ -59,4 +67,4 @@ class Deployment extends React.Component {
 
     }
 
-export default Deployment 
+export default Deployment

@@ -6,13 +6,14 @@
     border-width: 1px;
     color: white;
     /* opacity: .80; */
-    width: 230px;
-    height: 202px;
+    width: 13vw;
+    height: 13vw;
     margin: 3px;
     border-radius: 15px;
-    position: absolute;
+    position: relative;
+    font-size: 0.75vw;
   }
-  
+
   .zone-header {
     background: #5a0600;
     color: white;
@@ -20,35 +21,36 @@
     border-top-right-radius: 15px;
     height: 12%;
     text-align: left;
-    padding-top: 10px;
+    padding-top: .05vh;
     padding-left: 10px;
     font-weight: bold;
     opacity: 1;
     font-family: 'Orbitron', sans-serif;
+    font-size: 1.75vh;
   }
-  
+
   #new-york {
-    top: 225px;
-    left: 215px
+    top: 18vw;
+    left: 12vw;
   }
 
   #london {
-    top: 125px;
-    left: 485px;
+    top: 7vw;
+    left: 22vw;
   }
 
   #seoul {
-    top: 225px;
+    top: 18vw;
     /* left: 1000px */
-    right: 60px
+    left: 21vw;
   }
 
   #wakanda {
-    bottom: 150px;
-    left: 640px
+    top: 22vw;
+    left: 12vw;
   }
 
   #sokovia {
-    right: 315px;
-    top: 160px
+    left: 17vw;
+    top: 10vw;
   }

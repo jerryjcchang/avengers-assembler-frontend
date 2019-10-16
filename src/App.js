@@ -7,7 +7,8 @@ import Modal from './components/Modal'
 import {Route} from 'react-router-dom'
 import Player from './components/AudioPlayer'
 
-const URL = 'https://avengers-assembler-backend.herokuapp.com/api/v1/units'
+const URL = 'http://localhost:3000/api/v1'
+// 'https://avengers-assembler-backend.herokuapp.com/api/v1'
 
 class App extends Component {
 
@@ -38,14 +39,66 @@ class App extends Component {
     showModal: true,
     previousGame: "",
     selectedUnit: {},
+    playAudio: true,
+    keyIndex: 0,
   }
 
   componentDidMount(){
     this.getUnits()
+    this.initKonami()
   }
 
-  getUnits(){
-    fetch(URL)
+  initKonami = () => {
+    document.body.addEventListener("keydown", this.handleKonami)
+  }
+
+  handleKonami = (e) => {
+    console.log(e.key)
+    const { keyIndex } = this.state
+    const keys = [
+      "ArrowUp",
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "ArrowLeft",
+      "ArrowRight",
+      "b",
+      "a"
+    ]
+
+    const key = e.key
+
+    if(keys[keyIndex] === key){
+      let newKeyIndex = keyIndex+1
+    this.setState(
+      {keyIndex: newKeyIndex},
+      () => {console.log(this.state.keyIndex)})
+    }
+
+    if(this.state.keyIndex === keys.length){
+      this.unlockHero()
+      this.setState({
+        keyIndex: 0,
+      })
+    }
+  }
+
+  unlockHero = () => {
+    fetch(URL+"/unlock")
+    .then(r => r.json())
+    .then(unit => this.addHero(unit))
+  }
+
+  addHero = (hero) => {
+    this.setState({
+      undeployed: [...this.state.undeployed, hero]
+    })
+  }
+
+  getUnits = () => {
+    fetch(URL+"/units")
     .then(r => r.json())
     .then(units =>
       this.setState({
@@ -278,47 +331,62 @@ class App extends Component {
     console.log("attempting to select unit", unit.name)
   }
 
+  handleToggleAudio = () => {
+    this.setState({
+      playAudio: !this.state.playAudio
+    })
+  }
+
+  stopPlayAudio = () => {
+    this.state.playAudio ? this.stopAudio() : this.playAudio()
+  }
+
+  stopAudio = () => {
+    document.getElementById('audio-player').pause()
+  }
+
+  playAudio = () => {
+    document.getElementById('audio-player').play()
+  }
+
   render() {
     return (
       <div className="App">
-      <Player />
-      <DragDropContext
-        onDragEnd={this.onDragEnd}>
-      <div>
-        <Deployment
-          zones={this.state.zones}
-          units={[this.state.zone1, this.state.zone2, this.state.zone3, this.state.zone4, this.state.zone5]}
-          generateEnemy={this.generateEnemy}
-          enemies={[this.state.eZone1, this.state.eZone2, this.state.eZone3, this.state.eZone4, this.state.eZone5]}
-          results={[this.state.result1, this.state.result2, this.state.result3, this.state.result4, this.state.result5]}
-          onWin={this.handleWin}
-          onLose={this.handleLoss}
-          deployed={this.state.deployed}
-          gamePhase={this.state.gamePhase}
-          round={this.state.round}
-          // compareTotal={this.compareTotal}
-          />
-        <Undeployed units={this.state.undeployed} selectUnit={this.handleSelectUnit}/>
-      </div>
-      </DragDropContext>
-      {this.state.showModal ? <div className="page-mask"></div> : null}
-      {this.state.showModal ?
-        <Route path="/" render={() => {
-          return(
-          <Modal
-            toggleModal={this.handleModal}
-            result={this.state.previousGame}
-            newRound={this.handleNewRound}
-            newGame={this.handleNewGame}
-            wins={this.state.gamesWon}
-            losses={this.state.gamesLost}
-            />
-          )
-        }}
-          />
-
-        :
+        <Player paused={this.state.playAudio} />
+        {this.state.showModal ?
+        <Modal
+          toggleModal={this.handleModal}
+          result={this.state.previousGame}
+          newRound={this.handleNewRound}
+          newGame={this.handleNewGame}
+          wins={this.state.gamesWon}
+          losses={this.state.gamesLost}
+        />
+          :
         null}
+        {this.state.showModal ?
+        <div className="page-mask"></div> : null}
+        <DragDropContext
+          onDragEnd={this.onDragEnd}>
+          <div>
+            <Deployment
+              audio={this.state.playAudio}
+              toggleAudio={this.handleToggleAudio}
+              zones={this.state.zones}
+              units={[this.state.zone1, this.state.zone2, this.state.zone3, this.state.zone4, this.state.zone5]}
+              generateEnemy={this.generateEnemy}
+              enemies={[this.state.eZone1, this.state.eZone2, this.state.eZone3, this.state.eZone4, this.state.eZone5]}
+              results={[this.state.result1, this.state.result2, this.state.result3, this.state.result4, this.state.result5]}
+              onWin={this.handleWin}
+              onLose={this.handleLoss}
+              deployed={this.state.deployed}
+              gamePhase={this.state.gamePhase}
+              round={this.state.round}
+              // compareTotal={this.compareTotal}
+              />
+            <Undeployed units={this.state.undeployed} selectUnit={this.handleSelectUnit}/>
+          </div>
+        </DragDropContext>
       </div>
     );
   }
