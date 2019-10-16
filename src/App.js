@@ -7,7 +7,7 @@ import Modal from './components/Modal'
 import {Route} from 'react-router-dom'
 import Player from './components/AudioPlayer'
 
-const URL = 'http://localhost:3000/api/v1'
+const URL = 'http://avengers-assembler-backend.herokuapp.com/api/v1'
 // 'https://avengers-assembler-backend.herokuapp.com/api/v1'
 
 class App extends Component {
@@ -92,9 +92,11 @@ class App extends Component {
   }
 
   addHero = (hero) => {
-    this.setState({
-      undeployed: [...this.state.undeployed, hero]
-    })
+    if(!this.state.undeployed.includes(hero)){
+      this.setState({
+        undeployed: [...this.state.undeployed, hero]
+      })
+    }
   }
 
   getUnits = () => {
