@@ -1,32 +1,287 @@
-/* .App {
+.App {
+  display: flex;
+  height: 100%;
+}
+
+body {
+  /* background: #000000; */
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  justify-content: center;
+  /* align-items: center; */
+  background-color: #616161;
+  color: white;
+  overflow: hidden;
+  width: 100%;
+  height: 100%%;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+p {
+  font-size: 6px
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.page-mask {
+  background: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* align-items: center; */
+  text-align: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+.ready-button {
+  font-size: 4vh;
+  text-shadow: -1px 1px #346392;
+  padding: 12px;
+  padding-top: 2vh;
+  border-radius: 5px;
   color: white;
+  background-image: linear-gradient( #35608b, #002952);
+  border: none;
+  position: absolute;
+  right: 2vw;
+  top: 2vw;
+  font-family: 'Orbitron', sans-serif;
+  height: 7.5vh;
+  width: 25vh;
 }
 
-.App-link {
-  color: #61dafb;
+#volume-icon {
+  margin-top: 14px;
+  margin-left: 14px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.ready-button:hover {
+  /* box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047; */
+  border-color: blue;
+  border-style: solid;
+  border-width: 0.1vw;
+}
+
+.ready-button:active,
+.ready-button.active {
+  box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
+}
+
+.map {
+  background-image: url('/img/mission_map.jpeg');
+  background-repeat: no-repeat;
+  /* background: #000000; */
+  background-size: 100%;
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  margin-left: 0;
+}
+
+.undeployed {
+  /* display: flex; */
+  position: relative;
+  width: 100vw;
+  height: 20vh;
+  /* background: black; */
+  border-color: #2196f3;
+  border-width: 1px;
+  border-style: solid;
+  background: black;
+  bottom: 1%;
+  color: white;
+  text-align: left;
+  /* padding: 10px, auto, 10px, auto; */
+  /* size: 10px; */
+  /* margin: 10px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 3vh;
+  /* right: 45px; */
+  /* overflow-y: scroll; */
+}
+
+.undeployed-header {
+  padding-top: 1vh;
+  font-size: 10px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.ud-container {
+  display: flex;
+}
+
+/* d */
+.unit-icon {
+  position: relative;
+}
+
+.unit-undeployed {
+  position: relative;
+  display: inline-block;
+  height: 6.5vw;
+  width: 6.5vw;
+  margin-left: 0.4vw;
+  margin-right: 0.4vw;
+  font-size: 10px;
+  background: grey;
+  text-align: center;
+  border-color: lightgrey;
+  border-style: solid;
+  border-width: 0.15vw;
+  border-radius: 5px;
+  bottom: 1vh;
+}
+
+.unit-points {
+  position: absolute;
+  color: white;
+  /* right: 10px; */
+  bottom: 2.5vh;
+  margin-left: 1.6vh;
+  background-color: darkred;
+  font-size: 3vh;
+  width: 3vh;
+  height: 3vh;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 0.05vh;
+}
+
+.unit-deployed-points {
+  position: absolute;
+  color: white;
+  /* right: 10px; */
+  bottom: 0vh;
+  margin-left: 0.15vw;
+  margin-bottom: 0.75vw;
+  background-color: darkred;
+  font-size: 1vw;
+  width: 1vw;
+  height: 1vw;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 3vh;
+}
+
+.unit-undeployed:hover,
+.unit-deployed:hover {
+  border-color: red;
+  border-width: 0.15vw;
+}
+
+.unassigned {
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 10px;
+  background: grey;
+}
+
+.team {
+  display: flex;
+  margin-left: .3vw;
+  text-align: center;
+  height: 30%;
+}
+
+.team-header {
+  height: 5px;
+}
+
+.unit-deployed {
+  background: darkblue;
+  height: 3.7vw;
+  width: 3.7vw;
+  border-color: lightgrey;
+  border-style: solid;
+  border-width: 0.1vw;
+  border-radius: 0.15vw;
+  margin-right: 0.25vw;
+}
+
+.enemy {
+  background: darkred;
+  height: 60px;
+  width: 60px;
+}
+
+.result {
+  padding-top: 50px;
+      display: inline-block;
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      background: black;
+      width: 100%;
+      height: 112px;
+      text-align: center;
+      vertical-align: middle;
+      border-radius: 15px;
+      font-size: 3.85vw;
+      opacity: .90;
+      font-family: 'Orbitron', sans-serif;
+}
+
+.round-header {
+  position: absolute;
+  background: black;
+  width: 50%;
+  left: 23vw;
+  height: 8%;
+  font-size: 2vh;
+  font-family: 'Orbitron', sans-serif;
+  border-left: darkred;
+  border-right: darkred;
+  border-bottom: darkred;
+  border-style: solid;
+  border-top-width: 0px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-size: 2.5vw;
+  padding-top: 2vh;
+}
+
+.logo {
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  left: 13%;
+  width: 75%;
+  top: 1vh;
+}
+
+.silhouette {
+  width: 100%;
+  background-color: #000000;
+  opacity: 0.9;
+}
+
+.bg-img {
+  background-color: #000000;
+  width: 100%;
+}
+
+.big {
+  left: 39%;
+  top: 69%;
+  width: 25%;
+}
