@@ -7,7 +7,7 @@ import Modal from './components/Modal'
 import {Route} from 'react-router-dom'
 import Player from './components/AudioPlayer'
 
-const URL = 'http://avengers-assembler-backend.herokuapp.com/api/v1'
+const URL = 'https://avengers-assembler-backend.herokuapp.com/api/v1'
 // 'https://avengers-assembler-backend.herokuapp.com/api/v1'
 
 class App extends Component {
